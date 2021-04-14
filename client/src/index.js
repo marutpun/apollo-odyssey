@@ -1,12 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import GlobalStyles from './styles';
 import Pages from './pages';
 
-ReactDOM.render(
-  <React.StrictMode>
+const client = new ApolloClient({
+  uri: `http://localhost:4000`,
+  cache: new InMemoryCache(),
+});
+
+render(
+  <ApolloProvider client={client}>
     <GlobalStyles />
     <Pages />
-  </React.StrictMode>,
+  </ApolloProvider>,
   document.getElementById('root')
 );
